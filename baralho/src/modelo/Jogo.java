@@ -18,7 +18,7 @@ public class Jogo {
 		criar_cartas();
 		embaralhar();
 //		primeirasCartas();
-		primeiraEultima();
+// 		primeiraEultima();
 //		cartasAleatorias();
 	}
 	
@@ -118,9 +118,9 @@ public class Jogo {
 		baralho.remove(carta_jogador2);
 		
 		
-		// Print pra debug
-		System.out.print("CJ1: " + carta_jogador1 + " \n\n\nCJ2: " + carta_jogador2+"\n\n\nPontJog1: " +
-				pontos_jog1 + "\n\n\nPontJog2: " + pontos_jog2 + "\n\n\n");
+		
+		//System.out.print("CJ1: " + carta_jogador1 + " \n\n\nCJ2: " + carta_jogador2+"\n\n\nPontJog1: " +
+		//		pontos_jog1 + "\n\n\nPontJog2: " + pontos_jog2 + "\n\n\n");
 		
 	}
 	
