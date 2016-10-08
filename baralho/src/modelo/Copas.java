@@ -2,12 +2,10 @@ package modelo;
 
 public class Copas  extends  Carta
 {
-	int naipe = 3;
-
 	public Copas(int numero)
 	{
 		super(numero);
-		
+		naipe = 3;
 	}
 	
 	@Override
@@ -15,12 +13,4 @@ public class Copas  extends  Carta
 	{
 		return numeros[numero-1] + " de Copas";
 	}
-	
-
-	@Override
-	public int getNaipe() {
-	
-		return this.naipe;
-	}
-
 }
