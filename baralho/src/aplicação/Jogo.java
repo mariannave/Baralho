@@ -2,6 +2,7 @@ package aplicação;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.function.Consumer;
 
 import modelo.Carta;
@@ -16,9 +17,9 @@ public class Jogo {
 	ArrayList<Carta> baralho;
 	static int pontos_jog1 ;
 	static int pontos_jog2 ;
-	
-	int jogadas = 0;
+
 	ArrayList<Consumer<String>> metodos;
+	
 		
 	Jogo() {
 		baralho = new ArrayList<Carta>();
@@ -30,8 +31,6 @@ public class Jogo {
 		addMetodo(f -> primeirasCartas());
 		addMetodo(f -> primeiraEultima());
 		addMetodo(f -> cartasAleatorias());
-		
-
 	}
 	
 	
@@ -66,7 +65,8 @@ public class Jogo {
 	
 	
 	// Metodo que retira as cartas do inicio do baralho 
-	public void primeirasCartas() {System.out.println("Algoritmo -> Primeiras Cartas");
+	public void primeirasCartas() {
+		System.out.println("Algoritmo -> Primeiras Cartas");
 		embaralhar();
 		Carta carta_jogador1 = baralho.get(0);
 		Carta carta_jogador2 = baralho.get(1);
@@ -91,15 +91,16 @@ public class Jogo {
 		baralho.remove(carta_jogador2);
 		
 		//print so pra depuracao
-		System.out.print("CJ1: " + carta_jogador1 + " \n\n\nCJ2: " + carta_jogador2+"\n\n\nPontJog1: " +
-		pontos_jog1 + "\n\n\nPontJog2: " + pontos_jog2 + "\n\n\n");
+		System.out.print("CJ1: " + carta_jogador1 + " == CJ2: " + carta_jogador2+"\n");
+		System.out.println("PontJog1: " + pontos_jog1 + " == PontJog2: " + pontos_jog2 + "\n\n");
 	
 		
 	}
 	
 	
 	//Metodo que retira a primeira e a ultima carta do baralho
-	public void primeiraEultima() {System.out.println("Algoritmo -> Primeira e ultima");
+	public void primeiraEultima() {
+		System.out.println("Algoritmo -> Primeira e ultima");
 		
 		embaralhar();
 		
@@ -131,14 +132,15 @@ public class Jogo {
 		
 		
 		//lembrar de tirar os prints 
-		System.out.print("CJ1: " + carta_jogador1 + " \n\n\nCJ2: " + carta_jogador2+"\n\n\nPontJog1: " +
-				pontos_jog1 + "\n\n\nPontJog2: " + pontos_jog2 + "\n\n\n");
+		System.out.print("CJ1: " + carta_jogador1 + " == CJ2: " + carta_jogador2+"\n");
+		System.out.println("PontJog1: " + pontos_jog1 + " == PontJog2: " + pontos_jog2 + "\n\n");
 		
 	}
 	
 	
 	// Metodo que retira cartas do baralho aleatoriamente
-	public void cartasAleatorias(){System.out.println("Algoritmo -> Cartas Aleatorias");
+	public void cartasAleatorias(){
+		System.out.println("Algoritmo -> Cartas Aleatorias");
 		embaralhar();
 		
 		Random r = new Random();
@@ -177,32 +179,14 @@ public class Jogo {
 		baralho.remove(carta_jogador2);
 		
 		//print so pra depuracao
-		System.out.print("CJ1: " + carta_jogador1 + " \n\n\nCJ2: " + carta_jogador2+"\n\n\nPontJog1: " +
-		pontos_jog1 + "\n\n\nPontJog2: " + pontos_jog2 + "\n\n\n");
+		System.out.print("CJ1: " + carta_jogador1 + " == CJ2: " + carta_jogador2+"\n");
+		System.out.println("PontJog1: " + pontos_jog1 + " == PontJog2: " + pontos_jog2 + "\n\n");
 		
 		
 	}
 	
 	/// o main vai pra aplicação
-	public static void main(String[] args) {
-		Jogo jogo = new Jogo();
-		
-		System.out.println(jogo);
-		
-		for(int i = 1; i <= 10; i++){
-			System.out.println("**** " + i + "ª Rodada ****\n");
-			jogo.jogar(); /*se quiser escolher um único algoritmo só é passar um int de 0 à 2
-						 	nesse parâmetro jogar(int x), sendo 0 para o algoritmo
-						 	PrimeirasCartas, 1 para Primeira e utima e 2 para Cartas aleatórias */
-			
-		}
-		if(pontos_jog1 == pontos_jog2)
-		{
-			System.out.println("**** 11 Rodada ****\n");
-			jogo.jogar();
-		}
-		
-	}
+	
 	
 	
 	@Override
@@ -228,5 +212,63 @@ public class Jogo {
 	
 	private void addMetodo(Consumer<String> f) {
 		metodos.add(f);
+	}
+	
+	
+	public static void main(String[] args) {
+		Jogo jogo = new Jogo();
+		Scanner teclado = new Scanner(System.in);
+			
+		int entrada = -1;
+		
+		while(entrada != 0){
+			System.out.println("============ GAME ============\n");
+			System.out.println("- 0: Sair do jogo");
+			System.out.println("- 1: Algoritmo aleatorio");
+			System.out.println("- 2: Algoritmo selecionado");	
+			System.out.print("- Digite uma opcao: ");
+			System.out.println("");
+			entrada = Integer.parseInt(teclado.nextLine());
+
+			if(entrada == 1){
+				for(int i = 1; i <= 10; i++) {
+					System.out.println("**** " + i + "ª Rodada ****");
+					jogo.jogar(); /*se quiser escolher um único algoritmo só é passar um int de 0 à 2
+								 	nesse parâmetro jogar(int x), sendo 0 para o algoritmo
+								 	PrimeirasCartas, 1 para Primeira e utima e 2 para Cartas aleatórias */
+					
+				}
+				if(pontos_jog1 == pontos_jog2) {
+					System.out.println("**** 11 Rodada ****\n");
+					jogo.jogar();
+				}
+			}else if(entrada == 2){
+				System.out.println("============ OPCOES DE ALGORITMOS ============\n");
+				System.out.println("Selecione o algoritmo.");
+				System.out.println("- 1: Retirar as cartas do inicio");
+				System.out.println("- 2: Retirar as cartas do inicio e do fim");
+				System.out.println("- 3: Retirar as cartas aleatoriamente");
+				System.out.print("- Digite uma opcao: ");
+				System.out.println("");
+				int novaEntrada = Integer.parseInt(teclado.nextLine());
+				
+				novaEntrada = novaEntrada - 1;
+				
+				for(int i = 1; i <= 10; i++) {
+					System.out.println("**** " + i + "ª Rodada ****");
+					jogo.jogar(novaEntrada); /*se quiser escolher um único algoritmo só é passar um int de 0 à 2
+								 	nesse parâmetro jogar(int x), sendo 0 para o algoritmo
+								 	PrimeirasCartas, 1 para Primeira e utima e 2 para Cartas aleatórias */
+					
+				}
+				if(pontos_jog1 == pontos_jog2) {
+					System.out.println("**** 11 Rodada ****\n");
+					jogo.jogar();
+				}
+
+			}
+		}
+		
+		System.out.println("Você saiu do jogo.");		
 	}
 }
